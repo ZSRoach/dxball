@@ -39,7 +39,6 @@ public class BallController : MonoBehaviour
             direction.y = -direction.y;
         }
         if (collision.gameObject.CompareTag("Void")){
-            Debug.Log("Game over!");
             gameObject.SetActive(false);
             score.addScore(0);
         }
