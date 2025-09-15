@@ -10,7 +10,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         rb= GetComponent<Rigidbody2D>();
-        direction= Vector2.one.normalized; //(1,1)
+        direction = Vector2.one.normalized; //(1,1)
     }
 
     // Update is called once per frame
@@ -19,8 +19,21 @@ public class BallController : MonoBehaviour
         rb.linearVelocity= direction*speed;
     }
 
-    void OnTriggerEnter2D(Collider2D collison){
-        if (collison.gameObject.CompareTag("Paddle"))
+    void OnTriggerEnter2D(Collider2D collision){
+        if (collision.gameObject.CompareTag("Paddle"))
             direction.y = -direction.y;
+        if (collision.gameObject.CompareTag("Brick")){
+            direction.y = -direction.y;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.CompareTag("Wall")){
+            direction.x = -direction.x;
+        }
+        if (collision.gameObject.CompareTag("Ceiling")){
+            direction.y = -direction.y;
+        }
+        if (collision.gameObject.CompareTag("Void")){
+            Debug.Log("Game over!");
+        }
     }
 }
